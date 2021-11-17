@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Dialog,
@@ -6,15 +7,27 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import React from "react";
 
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  failure: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    margin: "100px",
+  },
+  failureButton: {
+    marginTop: "25px",
+  },
+});
 const FailureDialog = (props) => {
-  console.log("failure dialog user", props.user);
   const [open, setOpen] = React.useState(true);
+  const classes = useStyles();
 
   const handleClose = () => {
     setOpen(false);
-    
   };
 
   return (
@@ -24,24 +37,16 @@ const FailureDialog = (props) => {
           <Typography variant="h4">Failure</Typography>
         </DialogTitle>
         <DialogContent style={{ border: "2px solid black" }}>
-          <DialogContentText
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              margin: "100px",
-            }}
-          >
+          <DialogContentText className={classes.failure}>
             <Typography variant="h5">
-              {props.user.profile.displayName.split(" ")[0]}'s Account is
+              {props.user[0].profile.displayName.split(" ")[0]}'s Account is
               Already Activated
             </Typography>
             <Button
               onClick={handleClose}
               variant="contained"
               color="primary"
-              style={{ marginTop: "25px" }}
+              className={classes.failureButton}
             >
               Close
             </Button>

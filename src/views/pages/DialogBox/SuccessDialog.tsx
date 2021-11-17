@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Button,
   Dialog,
@@ -6,16 +8,28 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import React from "react";
+
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  success: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    margin: "100px",
+  },
+  successButton: {
+    marginTop: "25px",
+  },
+});
 
 const SuccessDialog = (props) => {
-  console.log("success dialog user", props.user);
-
   const [open, setOpen] = React.useState(true);
+  const classes = useStyles();
 
   const handleClose = () => {
     setOpen(false);
-    
   };
 
   return (
@@ -26,15 +40,7 @@ const SuccessDialog = (props) => {
         </DialogTitle>
 
         <DialogContent style={{ border: "2px solid black" }}>
-          <DialogContentText
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              margin: "100px",
-            }}
-          >
+          <DialogContentText className={classes.success}>
             <Typography variant="h5">
               {props.user.profile.displayName.split(" ")[0]}'s Account is
               Activated
@@ -44,7 +50,7 @@ const SuccessDialog = (props) => {
               onClick={handleClose}
               variant="contained"
               color="primary"
-              style={{ marginTop: "25px" }}
+              className={classes.successButton}
             >
               Close
             </Button>
